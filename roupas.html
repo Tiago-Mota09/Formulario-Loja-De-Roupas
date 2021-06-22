@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Loja de Roupas – Pedido de Vendas</title>
+    <meta charset="utf-8">
+    <script src="js/roupas.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/roupas.css">
+</head>
+
+<body>
+  <div class="content">
+		<h1>Sua loja aqui!</h1>
+		<div id="principal">
+			<h2>Pedido de Vendas - Loja de Roupas</h2>
+				<hr>
+					<!-- Área do Menu -->
+					<div id="menu">
+							<button id="btn1" class="botaoAceso" onclick="mostraArea(this, 'areaItens')">1. Itens</button>
+							<button id="btn2" onclick="mostraArea(this, 'areaCliente')">2. Dados Cliente</button>
+							<button id="btn3" onclick="mostraArea(this, 'areaEntrega'); valida('areaCliente')">3. Entrega</button>
+							<button id="btn4" onclick="mostraArea(this, 'areaPagamento')">4. Pagamento</button>
+					</div>
+					<hr>
+					<div id="areaItens">
+							<label>Data de criação:</label>
+							<label><input type="date" id="dataCriacao" name="dataCriacao"></label>
+							<label>Canal de venda:</label>
+							<input type="radio" name="canalVenda" value="S" checked onchange="verificaCanal(this.value)">Site
+							<input type="radio" name="canalVenda" value="L" onchange="verificaCanal(this.value)">Loja
+							<input type="radio" name="canalVenda" value="R" onchange="verificaCanal(this.value)">Representante<br>
+							<label>Situação:</label>
+							<label>
+						<select id="situacao" name="situacao">
+							<option value="N">Novo</option>
+							<option value="C">Cancelado</option>
+							<option value="S">Em Separação</option>
+						</select>
+						</label>
+							<label>Loja:</label>
+							<select id="loja" name="loja">
+							<option value="1">1 - Central</option>
+							<option value="2">2 - Centro</option>
+							<option value="3">3 - Shopping Leste</option>
+						</select>
+							<br>
+							<label>Vendedor:</label>
+							<label><input type="text" id="vendedor" maxlength="50" name="vendedor"></label>
+							<label>Gerente:</label>
+							<label><input type="text" id="vendedor" maxlength="50" name="vendedor"></label>
+							<br><br>
+							<label>Observações:</label><br>
+							<textarea name="obs" id="obs" rows="5" cols="100"></textarea>
+							<hr>
+							<table border='1'>
+									<!-- 1a linha - Títulos -->
+									<tr class="titTabela">
+											<th colspan="2">Produto</th>
+											<th class="titDireita">Preço Unitário</th>
+											<th>Quantidade</th>
+											<th class="titDireita">Total</th>
+											<th>Extra (opcional)</th>
+											<td rowspan="4"><span id="areaImagem"></span></td>
+									</tr>
+									<!-- 2a linha - Produto 1 -->
+									<tr>
+											<th>1</th>
+											<td>
+													<select id="produto1" name="produto1" onchange="CalcularProduto(1)">
+										<option value="">Escolha</option>
+									</select>
+											</td>
+											<td>
+													<input type="text" id="prProduto1" class="numero" value="0,00" readonly>
+											</td>
+											<td>
+													<input type="number" id="qtdProduto1" name="qtdProduto1" maxlength="2" class="quantidade" value="0" min="0" max="99" onfocus="this.select()" onchange="CalcularProduto(1)">
+											</td>
+											<td>
+													<input type="text" id="somaProduto1" class="numero" value="0,00" readonly>
+											</td>
+											<td>
+													<input type="checkbox" id="embProduto1" name="embProduto1" onchange="CalcularTotal()"> Embalar para presente
+													<span class="atencao">*</span>
+											</td>
+									</tr>
+									<!-- 2a linha - Produto 2 -->
+									<tr>
+											<th>2</th>
+											<td>
+													<select id="produto2" name="produto2" onchange="CalcularProduto(2)">
+										<option value="">Escolha</option>
+									</select>
+											</td>
+											<td> <input type="text" id="prProduto2" class="numero" value="0,00"> </td>
+											<td>
+													<input type="number" id="qtdProduto2" name="qtdProduto2" maxlength="2" class="quantidade" value="0" min="0" max="99" onfocus="this.select()" onchange="CalcularProduto(2)">
+											</td>
+											<td> <input type="text" id="somaProduto2" class="numero" value="0,00"> </td>
+											<td>
+													<input type="checkbox" id="embProduto2" name="embProduto2" onchange="CalcularTotal()"> Embalar para presente
+													<span class="atencao">*</span>
+											</td>
+									</tr>
+									<!-- 3a linha - Produto 3 -->
+									<tr>
+											<th>3</th>
+											<td>
+													<select id="produto3" name="produto3" onchange="CalcularProduto(3)">
+										<option value="">Escolha</option>
+									</select>
+											</td>
+											<td> <input type="text" id="prProduto3" class="numero" value="0,00"> </td>
+											<td>
+													<input type="number" id="qtdProduto3" name="qtdProduto3" maxlength="2" class="quantidade" value="0" min="0" max="99" onfocus="this.select()" onchange="CalcularProduto(3)">
+											</td>
+											<td> <input type="text" id="somaProduto3" class="numero" value="0,00"> </td>
+											<td>
+													<input type="checkbox" id="embProduto3" name="embProduto3" onchange="CalcularTotal()"> Embalar para presente
+													<span class="atencao">*</span>
+											</td>
+									</tr>
+							</table>
+					</div>
+					<div id="areaCliente">
+							<input type="radio" name="tipoPessoa" value="PF" checked onchange="areaPFPJ(this)"> Pessoa Física
+							<input type="radio" name="tipoPessoa" value="PJ" onchange="areaPFPJ(this)"> Pessoa Jurídica
+							<div id="areaPF">
+									<label>Nome do (a) Cliente:</label>
+									<input type="text" id="nome" name="nome" maxlength="80" size="50"><br>
+							</div>
+							<div id="areaPJ">
+									<label>Razão Social:</label>
+									<input type="text" id="razaoSocial" name="razaoSocial" maxlength="100" size="50"><br>
+									<label>Responsável:</label>
+									<input type="text" id="responsavel" name="responsavel" maxlength="80" size="50"><br>
+							</div>
+							<label>E-mail</label>
+							<input type="email" id="email" name="email" maxlength="100" size="50"><br>
+							<label class="labelduplo"><input type="checkbox" id="aceitaEmails" name="aceitaEmails" checked>
+						Aceita receber propaganda</label><br>
+							<label>Telefone:</label> (
+							<input type="text" id="dddFone" name="dddFone" maxlength="2" size="2" class="ddd">)
+							<label><input type="tel" id="fone" name="fone" maxlength="10">
+						</label>
+							<label>Tipo: 
+						<select id ="tipoFone" name="tipoFone" >
+							<option value="R">Residencial</option>
+							<option value="C">Comercial</option>
+							<option value="O">Contato</option>
+						</select>
+						</label>
+							<br>
+							<label>Celular:</label> (
+							<input type="text" id="dddCelular" name="dddCelular" maxlength="2" size="2" class="ddd">)
+							<input type="tel" id="celular" name="celular" maxlength="10">
+							<h3>Documentação</h3>
+							<div id="areaPFDoc">
+									<label>CPF:</label>
+									<input type="text" id="cpf" name="cpf" maxlength="14"><br><br>
+									<label>RG:</label>
+									<input type="text" id="rg" name="rg" maxlength="10"><br>
+									<label>Data de emissão:</label>
+									<input type="date" id="emissaoRG" name="emissaoRG">
+									<br>
+									<label>Local:</label>
+									<input type="text" id="localEmissaoRG" name="localEmissaoRG" maxlength="25">
+							</div>
+							<div id="areaPJDoc">
+									<label>CNPJ:</label>
+									<input type="text" id="cnpj" name="cnpj" maxlength="14"><br><br>
+									<label>IE:</label>
+									<input type="text" id="ie" name="ie" maxlength="10"><br>
+							</div>
+					</div>
+					<div id="areaEntrega">
+							<div id="retirada">
+									<input type="radio" name="opcaoRetirada" value="E" checked onchange="opcaoRetirada(this.value)">Entrega no endereço abaixo
+									<input type="radio" name="opcaoRetirada" value="R" onchange="opcaoRetirada(this.value)">Retirada na Loja
+							</div>
+							<div id="entregaEndereco">
+									<br>
+									<label>CEP:</label>
+									<input type="text" id="cep" name="cep" maxlength="9"><br>
+									<label>Endereço:</label>
+									<input type="text" id="endereco" name="endereco" maxlength="100">
+									<label>Complemento:</label>
+									<input type="text" id="complemento" name="complemento" maxlength="50"> <br>
+									<label>Bairro:</label>
+									<input type="text" id="bairro" name="bairro" maxlength="50"> <br>
+									<label>Cidade:</label>
+									<input type="text" id="cidade" name="cidade" maxlength="50"> <br>
+									<label>UF</label>
+									<select id="uf" name="uf">
+								<option value="AC">AC</option>
+								<option value="AL">AL</option>
+								<option value="AM">AM</option>
+								<option value="AP">AP</option>
+								<option value="BA">BA</option>
+								<option value="CE">CE</option>
+								<option value="DF">DF</option>
+								<option value="ES">ES</option>
+								<option value="GO">GO</option>
+								<option value="MA">MA</option>
+								<option value="MG">MG</option>
+								<option value="MS">MS</option>
+								<option value="MT">MT</option>
+								<option value="PA">PA</option>
+								<option value="PB">PB</option>
+								<option value="PE">PE</option>
+								<option value="PI">PI</option>
+								<option value="PR">PR</option>
+								<option value="RJ">RJ</option>
+								<option value="RN">RN</option>
+								<option value="RS">RS</option>
+								<option value="RO">RO</option>
+								<option value="RR">RR</option>
+								<option value="SC">SC</option>
+								<option value="SE">SE</option>
+								<option value="SP" selected>SP</option>
+								<option value="TO">TO</option>
+							</select> <br>
+									<label>Ponto de Referência:</label>
+									<input type="text" id="referencia" name="referencia" maxlength="50"> <br>
+							</div>
+							<hr>
+							<label>Previsão de entrega:</label>
+							<input type="date" id="previsaoEntrega" readonly>
+					</div>
+					<div id="areaPagamento">
+							<label>Cupom de Desconto:</label>
+							<input type="text" id="cupom" name="cupom" maxlength="15" onblur="ValidaCupom(this.value)">
+							<span id="textoCupom"></span><br>
+							<div id="areaRetirada">
+									<label>Forma de Entrega:</label>
+									<select id="formaEntrega" name="formaEntrega" onchange="CalcularTotal()">
+							<option value="PAC">Correios normal (PAC)</option>
+							<option value="SEDEX">Correios Expresso(Sedex)</option>
+							<option value="TRANSP">Transportadora</option>
+						</select>
+							</div>
+							<hr>
+							<div class='linha'>
+									<div class='coluna' id="areaDetalhamento">
+											<h3>Forma de Pagamento:</h3>
+											<label><input type="radio" id="formaPgto" name="formaPgto" value="B" onchange="FormaPgto()"> Boleto</label>
+											<span id="valorBoleto"></span> <br>
+											<label><input type="radio" id="formaPgto" name="formaPgto" value="TR" onchange="FormaPgto()"> Trans.Bancária/PIX</label>
+											<span id="valorTransferencia"></span> <br>
+											<label><input type="radio" id="formaPgto" name="formaPgto" value="MP" onchange="FormaPgto()"> Mercado Pago</label>
+											<span id="valorMPago"></span> <br>
+											<label><input type="radio" id="formaPgto" name="formaPgto" value="CC" onchange="FormaPgto()" checked> Cartão de Crédito</label>
+											<span id="valorCC"></span>
+											<div id="areaCC">
+													<label>
+									<select id ="opcoesCC" onchange="FormaPgto()">
+										<option value="CC1">Até 1x s/juros - Cartão de Crédito</option>
+										<option value="CC6">Até 6x c/juros - Cartão de Crédito</option>
+									</select>
+								</label>
+													<br>
+													<label>Número do Cartão:</label>
+													<input type="text" id="numeroCartao" name="numeroCartao" maxlength="20"> <br>
+													<label>Nome:</label>
+													<input type="text" id="nomeCartao" name="nomeCartao" maxlength="50" placeholder="como está no cartão"> <br>
+													<label>Validade:</label>
+													<label>Mês:
+									<select id ="mesCartao">
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+									</select> 
+									</label>
+													<label>Ano:
+									<select id ="mesCartao">
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+										<option value="2023">2023</option>
+										<option value="2024">2024</option>
+										<option value="2025">2025</option>
+										<option value="2026">2026</option>
+										<option value="2027">2027</option>
+										<option value="2028">2028</option>
+										<option value="2029">2029</option>
+									</select> 
+									</label>
+													<br>
+													<label>Código CVV:</label>
+													<input type="text" id="cvvCartao" name="cvvCartao" maxlength="5" size="5"> <br>
+											</div>
+											<br>
+											<br>
+									</div>
+									<div class='coluna' id="areaResumo">
+											<h2>Resumo</h2>
+											<table>
+													<tr id="l1">
+															<th>Descrição</th>
+															<th class="direita">Valor</th>
+													</tr>
+													<tr class="fundoCinza">
+															<td>Total de Produtos</td>
+															<td id="resumoTotItens" class="direita"></td>
+													</tr>
+													<tr>
+															<td id="resumoTxtCupom">Cupom de Desconto</td>
+															<td id="resumoCupom" class="direita"></td>
+													</tr>
+													<tr class="fundoCinza">
+															<td class="subtotal">Subtotal</td>
+															<td id="resumoSubTot1" class="direita subtotal"></td>
+													</tr>
+													<tr>
+															<td>Desconto por valor do pedido (5%)</td>
+															<td id="resumoDescVlrPedido" class="direita"></td>
+													</tr>
+													<tr class="fundoCinza">
+															<td class="subtotal">Subtotal</td>
+															<td id="resumoSubTot2" class="direita subtotal"></td>
+													</tr>
+													<tr>
+															<td>Embalagem para presente</td>
+															<td id="resumoEmbalagem" class="direita"></td>
+													</tr>
+													<tr class="fundoCinza">
+															<td class="subtotal">Subtotal</td>
+															<td id="resumoSubTot3" class="direita subtotal"></td>
+													</tr>
+													<tr>
+															<td>Frete</td>
+															<td id="resumoFrete" class="direita "></td>
+													</tr>
+													<tr>
+															<td class="total">TOTAL DO PEDIDO</td>
+															<td id="resumoValorPedido" class="total direita "></td>
+													</tr>
+											</table>
+									</div>
+							</div>
+							<hr>
+							<input type="button " value="CONFIRMAR PEDIDO ">
+							<input type="button " value="IMPRIMIR PEDIDO" onclick="window.print()">
+					</div>
+					<hr>
+					<div class='linha'>
+							<div class='coluna'>
+									<b>Valor estimado do Pedido: <span id="valorEstimadoPedido"></span></b>
+							</div>
+							<div class='coluna'>
+									<span class="atencao " id="msgEmbalagem ">* R$ 10,00 p/ embalagem. Valor de R$ 25,00 caso passe de 2 embalagens</span>
+							</div>
+					</div>
+					<script>
+							var $valorPedido = 0 // Definindo o valor do pedido (variável global)
+							var $percDescCupom = 0 //% de desconto por cupom válido
+							var $descontoItens = 0 // Se total itens passar R$ 1000 => desconto 5%
+							var $custoEmbalagem = 0 // custo de embalagem p/presente total
+							var $valorFrete = 0 // custo de frete - zero se pedido>R$ 500 ou se retirada em loja
+							var $retiraLoja = false // Define se cliente retirará o produto na loja
+							dataCriacao.value = Hoje() // atualizando a data de criação do pedido para hoje
+							dataCriacao.min = Hoje() // limitando a data mínima do pedido para hoje
+							previsaoEntrega.value = Hoje(30) // 30 dias a partir de hoje
+									// mostrando valor estimado do pedido
+							valorEstimadoPedido.innerHTML = formataMoeda($valorPedido)
+							// Populando as listas de seleção
+							popularListas()
+					</script>
+		</div>
+	</div>
+</body>
+</html>

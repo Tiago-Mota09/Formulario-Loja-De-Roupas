@@ -1,0 +1,162 @@
+/* salvar como css/roupas.css */
+body {
+	background:url(imgs/fundo.jpg);
+	background-size:cover;
+	background-repeat: no-repeat; 
+}
+/*========================================ITENS================================= */
+h1{
+	display: flex;
+	justify-content: center;
+	color: rgb(0, 26, 255);
+  font-size: 3rem;
+	margin-bottom: 50px;
+}
+.content{
+	margin-top: 100px;
+}
+	#menu{
+	display: flex;
+	justify-content: space-around;
+}
+#principal {
+	background-color:rgba(255,255,255,0.8);
+	border:3px groove navy;
+	margin:auto;
+	padding:15px;
+	width:1020px;
+}
+h2{
+	text-align: center;
+}
+#menu button {
+	border:2px solid black;
+	padding:5px;
+	text-align:center;
+	width:240px;
+}
+
+.numero{ 
+	background-color:rgba(0,0,0,0);
+	border:none; 
+	color:navy;
+	text-align:right; 
+	width:150px; 
+}
+
+.quantidade{
+		text-align:right;
+		width:80px;
+}
+
+.atencao {color:red;}
+
+.linha {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.coluna {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+.titTabela		{ color:navy;}
+.titDireita 	{ text-align:right;}
+/*========================================DADOS CLIENTE================================= */
+#areaCliente, #areaEntrega, #areaPagamento {display:none;}
+
+.botaoNormal{background-color:white; color:black;font-weight:normal;}
+
+.botaoAceso {
+	background-color:rgb(226,240,217);
+	color:navy; 
+	font-weight:bolder;
+}
+
+/*LABEL = elemento de linha tem mediada afetada pelo o que ele contém, não adianta colocar medidas*/
+/*display:inline-block = transforma o label em elemento de bloco */
+label {
+	width:170px;
+	display:inline-block;
+	margin: 0 0 0 10px;
+}
+.labelduplo {
+	width:300px;
+}
+#areaPJ, #areaPJDoc {
+	display:none;
+	background-color:lightgreen;
+}
+
+#areaPF, #areaPFDoc {
+	/* background-color:lightblue; */
+}
+/*========================================PAGAMENTO================================= */
+#areaResumo{
+	font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+	font-size:12px;
+}
+#areaResumo th { 
+	color:white; background-color:rgb(67,114,197);
+	border-top-color:black;
+	border-top-style:solid ;
+	border-top-width:3px;
+	border-bottom:3px solid black;
+	text-align:center;
+}
+#areaResumo .fundoCinza { background-color:silver;}
+.direita {text-align:right;}
+.subtotal {font-weight:bold;}
+
+#areaResumo .traco {
+	border-top:3px solid black;
+	border-bottom:3px solid black;
+	background-color:plum;
+}
+#areaResumo .total { 
+	color:rgb(50,69,108);
+	font-weight:bold;
+	background-color:plum;
+}
+#cupom{
+	width: 173px;
+	margin-bottom: 5px;
+}
+#numeroCartao{
+	margin-bottom: 5px;
+}
+#opcoesCC{
+	margin-bottom: 5px;
+}
+#situacao{
+	margin-bottom: 5px;
+}
+#loja{
+	margin-left: 10px;
+}
+#uf{
+		margin-bottom: 5px;
+}
+input{
+	margin-bottom: 5px;
+}
+/*=======================================================================================*/
+/* Escondendo os spinners das caixas de números */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/*===========================================================================*/
+
+
